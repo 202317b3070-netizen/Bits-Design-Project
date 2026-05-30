@@ -675,7 +675,7 @@ function logout() {
         basePrice: parseFloat(cols[6]),
         locMultiplier: parseFloat(cols[7])
       };
-    }).filter(d => !isNaN(d.sqft));
+    }).filter(d => !isNaN(d.sqft));//filter invalid data
 
     console.log("✅ CSV Data Loaded:", marketData);
 
