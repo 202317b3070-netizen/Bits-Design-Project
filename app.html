@@ -686,9 +686,9 @@ function logout() {
         // ---------------------------------------------------------
 // LINEAR REGRESSION (Frontend - Gradient Descent)
 // ---------------------------------------------------------
-let model = { w: [], b: 0 };
-let featureMeans = [];
-let featureStds = [];
+let model = { w: [], b: 0 }; // w - how much each feature affects price// b-  base value added to prediction
+let featureMeans = []; //Stores the mean (average) of each feature
+let featureStds = []; // Stores the standard deviation of each feature
 
 // Convert a marketData row into feature vector
 function toFeatures(row) {
@@ -707,14 +707,14 @@ function fitStandardizer(X) {
   featureMeans = new Array(nFeatures).fill(0);
   featureStds  = new Array(nFeatures).fill(0);
 
-  // mean
+  // mean --- calculates the average value for every feature column
   for (let j = 0; j < nFeatures; j++) {
     let sum = 0;
     for (let i = 0; i < X.length; i++) sum += X[i][j];
     featureMeans[j] = sum / X.length;
   }
 
-  // std
+  // std -- amount of variation or dispersion in a set of data
   for (let j = 0; j < nFeatures; j++) {
     let sumSq = 0;
     for (let i = 0; i < X.length; i++) {
@@ -737,8 +737,8 @@ function trainLinearRegression() {
   }
 
   // Build X, y
-  const Xraw = marketData.map(d => toFeatures(d));
-  const y = marketData.map(d => d.price);
+  const Xraw = marketData.map(d => toFeatures(d)); //xraw - input feature
+  const y = marketData.map(d => d.price); //target value
 
   // Fit standardizer and transform X
   fitStandardizer(Xraw);
